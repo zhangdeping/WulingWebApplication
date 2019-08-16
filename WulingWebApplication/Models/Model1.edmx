@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="WuLinModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="PassengerVehicle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="时间" Type="nvarchar" MaxLength="255" />
+          <Property Name="国产进口" Type="nvarchar" MaxLength="255" />
+          <Property Name="省" Type="nvarchar" MaxLength="255" />
+          <Property Name="市" Type="nvarchar" MaxLength="255" />
+          <Property Name="县" Type="nvarchar" MaxLength="255" />
+          <Property Name="制造商" Type="nvarchar" MaxLength="255" />
+          <Property Name="车辆型号" Type="nvarchar" MaxLength="255" />
+          <Property Name="品牌" Type="nvarchar" MaxLength="255" />
+          <Property Name="车型" Type="nvarchar" MaxLength="255" />
+          <Property Name="排量" Type="nvarchar" MaxLength="255" />
+          <Property Name="变速器" Type="nvarchar" MaxLength="255" />
+          <Property Name="车辆类型" Type="nvarchar" MaxLength="255" />
+          <Property Name="车身型式" Type="nvarchar" MaxLength="255" />
+          <Property Name="燃油类型" Type="nvarchar" MaxLength="255" />
+          <Property Name="使用性质" Type="nvarchar" MaxLength="255" />
+          <Property Name="所有权" Type="nvarchar" MaxLength="255" />
+          <Property Name="抵押标记" Type="nvarchar" MaxLength="255" />
+          <Property Name="性别" Type="nvarchar" MaxLength="255" />
+          <Property Name="年龄" Type="nvarchar" MaxLength="255" />
+          <Property Name="车身颜色" Type="nvarchar" MaxLength="255" />
+          <Property Name="发动机型号" Type="nvarchar" MaxLength="255" />
+          <Property Name="功率" Type="nvarchar" MaxLength="255" />
+          <Property Name="排放标准" Type="nvarchar" MaxLength="255" />
+          <Property Name="轴距" Type="nvarchar" MaxLength="255" />
+          <Property Name="轮胎规格" Type="nvarchar" MaxLength="255" />
+          <Property Name="车外廓长" Type="nvarchar" MaxLength="255" />
+          <Property Name="车外廓宽" Type="nvarchar" MaxLength="255" />
+          <Property Name="车外廓高" Type="nvarchar" MaxLength="255" />
+          <Property Name="准确排量" Type="nvarchar" MaxLength="255" />
+          <Property Name="核定载客" Type="nvarchar" MaxLength="255" />
+          <Property Name="总质量" Type="nvarchar" MaxLength="255" />
+          <Property Name="整备质量" Type="nvarchar" MaxLength="255" />
+          <Property Name="轴数" Type="nvarchar" MaxLength="255" />
+          <Property Name="前轮距" Type="nvarchar" MaxLength="255" />
+          <Property Name="后轮距" Type="nvarchar" MaxLength="255" />
+          <Property Name="保有量" Type="int" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="WuLinModelStoreContainer">
+          <EntitySet Name="PassengerVehicle" EntityType="Self.PassengerVehicle" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WuLinModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="PassengerVehicle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="国产进口" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="省" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="市" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="县" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="制造商" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="车辆型号" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="品牌" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="车型" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="排量" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="变速器" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="车辆类型" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="车身型式" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="燃油类型" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="使用性质" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="所有权" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="抵押标记" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="性别" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="年龄" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="车身颜色" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="发动机型号" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="功率" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="排放标准" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="轴距" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="轮胎规格" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="车外廓长" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="车外廓宽" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="车外廓高" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="准确排量" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="核定载客" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="总质量" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="整备质量" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="轴数" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="前轮距" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="后轮距" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="保有量" Type="Int32" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="WuLinEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PassengerVehicles" EntityType="Self.PassengerVehicle" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WuLinModelStoreContainer" CdmEntityContainer="WuLinEntities1">
+          <EntitySetMapping Name="PassengerVehicles">
+            <EntityTypeMapping TypeName="WuLinModel.PassengerVehicle">
+              <MappingFragment StoreEntitySet="PassengerVehicle">
+                <ScalarProperty Name="时间" ColumnName="时间" />
+                <ScalarProperty Name="国产进口" ColumnName="国产进口" />
+                <ScalarProperty Name="省" ColumnName="省" />
+                <ScalarProperty Name="市" ColumnName="市" />
+                <ScalarProperty Name="县" ColumnName="县" />
+                <ScalarProperty Name="制造商" ColumnName="制造商" />
+                <ScalarProperty Name="车辆型号" ColumnName="车辆型号" />
+                <ScalarProperty Name="品牌" ColumnName="品牌" />
+                <ScalarProperty Name="车型" ColumnName="车型" />
+                <ScalarProperty Name="排量" ColumnName="排量" />
+                <ScalarProperty Name="变速器" ColumnName="变速器" />
+                <ScalarProperty Name="车辆类型" ColumnName="车辆类型" />
+                <ScalarProperty Name="车身型式" ColumnName="车身型式" />
+                <ScalarProperty Name="燃油类型" ColumnName="燃油类型" />
+                <ScalarProperty Name="使用性质" ColumnName="使用性质" />
+                <ScalarProperty Name="所有权" ColumnName="所有权" />
+                <ScalarProperty Name="抵押标记" ColumnName="抵押标记" />
+                <ScalarProperty Name="性别" ColumnName="性别" />
+                <ScalarProperty Name="年龄" ColumnName="年龄" />
+                <ScalarProperty Name="车身颜色" ColumnName="车身颜色" />
+                <ScalarProperty Name="发动机型号" ColumnName="发动机型号" />
+                <ScalarProperty Name="功率" ColumnName="功率" />
+                <ScalarProperty Name="排放标准" ColumnName="排放标准" />
+                <ScalarProperty Name="轴距" ColumnName="轴距" />
+                <ScalarProperty Name="轮胎规格" ColumnName="轮胎规格" />
+                <ScalarProperty Name="车外廓长" ColumnName="车外廓长" />
+                <ScalarProperty Name="车外廓宽" ColumnName="车外廓宽" />
+                <ScalarProperty Name="车外廓高" ColumnName="车外廓高" />
+                <ScalarProperty Name="准确排量" ColumnName="准确排量" />
+                <ScalarProperty Name="核定载客" ColumnName="核定载客" />
+                <ScalarProperty Name="总质量" ColumnName="总质量" />
+                <ScalarProperty Name="整备质量" ColumnName="整备质量" />
+                <ScalarProperty Name="轴数" ColumnName="轴数" />
+                <ScalarProperty Name="前轮距" ColumnName="前轮距" />
+                <ScalarProperty Name="后轮距" ColumnName="后轮距" />
+                <ScalarProperty Name="保有量" ColumnName="保有量" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

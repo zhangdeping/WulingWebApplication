@@ -3,26 +3,29 @@
     ViewBag.Title = "excel";
 }
 
-<div class="row">
-     
+    <div class="row">
+
+
         
+        @*<form action="/Excel/ImportExcel" method="post" enctype="multipart/form-data" class="col-md-offset-4 col-lg-offset-4col-xl-offset-4">
+            <h2 class="col-lg-offset-4col-xl-offset-4"> 用于小容量excel数据上传和导入</h2>
+            <input type="file" name="files" multiple  />
+            <input type="submit" value="提交"  />
+        </form>*@
 
-        <form action="/Excel/ImportExcel" method="post" enctype="multipart/form-data">
-            <input type="file" name="files" multiple />
-            <input type="submit" value="提交" />
-        </form>
 
-      
-        <div id="uploader" class="wu-example">
+        
+        <div id="uploader" class="wu-example col-md-offset-4 col-lg-offset-4col-xl-offset-4" style="margin-left:40%;margin-top:10%;">
+            <h2 class="col-lg-offset-4col-xl-offset-4"> 大容量excel数据上传和导入（首选）</h2>
             <!--用来存放文件信息-->
             <div id="thelist" class="uploader-list"></div>
             <div class="btns">
-                <div id="picker">选择文件</div>
+                <div id="picker" >选择文件</div>
                 <input id="ctlBtn" type="button" value="开始上传" class="btn btn-primary" />
             </div>
         </div>
     </div>
-</div>
+
 <link rel="stylesheet" type="text/css" href="~/UI/js/plugins/webuploader/webuploader.css">
 <script src="~/UI/js/jquery.min.js"></script>
 <script type="text/javascript" src="~/UI/js/plugins/webuploader/webuploader.js"></script>

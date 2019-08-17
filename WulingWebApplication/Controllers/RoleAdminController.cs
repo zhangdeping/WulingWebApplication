@@ -104,9 +104,38 @@ namespace WulingWebApplication.Controllers
                         return View("Error", result.Errors);
                     }
                 }
+
+                
                 return RedirectToAction("Index");
             }
             return View("Error", new string[] { "Role Not Found" });
+        }
+
+        /// <summary>
+        /// 更新角色的访问权限
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<ActionResult> UpdateAccessPowers(string id)
+        {
+            AppRole role = await  RoleManager.FindByIdAsync(id);
+            return View(role);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> UpdateAccessPowers(AppRole role)
+        {
+            AppRole myRole = await RoleManager.FindByIdAsync(role.Id);
+            myRole.Name = role.Name;
+            myRole.AccessPowers = role.AccessPowers;
+            
+            
+            var result = await RoleManager.UpdateAsync(myRole);
+            if(result.Succeeded)
+            {
+                return RedirectToAction("Index");
+            }
+            return View("Error",new string[] { "更新"+role.Name+"角色的访问权限失败"});
         }
 
         private void AddErrorsFromResult(IdentityResult result)

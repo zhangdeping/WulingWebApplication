@@ -21,6 +21,8 @@ namespace WulingWebApplication.Infrastructure
         {
             return new AppIdentityDbContext();
         }
+
+        public System.Data.Entity.DbSet<WulingWebApplication.Models.AppRole> IdentityRoles { get; set; }
     }
 
     public class IdentityDbInit : DropCreateDatabaseIfModelChanges<AppIdentityDbContext>

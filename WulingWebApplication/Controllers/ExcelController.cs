@@ -13,6 +13,8 @@ using WulingWebApplication.DAL;
 
 namespace WulingWebApplication.Controllers
 {
+    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class ExcelController : Controller
     {
         //

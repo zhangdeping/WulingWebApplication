@@ -1,0 +1,27 @@
+﻿@model WulingWebApplication.Models.CreateModel
+@{ ViewBag.Title = "创建用户账户";}
+
+<div class ="col-lg-offset-2 col-lg-8">
+
+
+    <h2 style="text-align:center">创建用户</h2>
+    @Html.ValidationSummary(false)
+    @using (Html.BeginForm())
+    {
+        <div class="form-group">
+            <label>用户名</label>
+            @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label>邮箱</label>
+            @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label>密码</label>
+            @Html.PasswordFor(x => x.Password, new { @class = "form-control" })
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+        @Html.ActionLink("取消", "Index", null, new { @class = "btn btn-default" })
+    }
+</div>
+

@@ -1,14 +1,23 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width" />
-    <title>错误</title>
-</head>
-<body>
-    <hgroup>
-        <h1>错误。</h1>
-        <h2>处理你的请求时出错。</h2>
-    </hgroup>
-</body>
-</html>
+﻿@model IEnumerable<string>
+@{ ViewBag.Title = "Error";}
+<div class="alert alert-danger">
+    @switch (Model.Count())
+    {
+        case 0:
+            @: Something went wrong. Please try again
+            break;
+        case 1:
+            @Model.First();
+            break;
+        default:
+            @: The following errors were encountered:
+            <ul>
+                @foreach (string error in Model)
+                {
+                    <li>@error</li>
+                }
+            </ul>
+            break;
+    }
+</div>
+@Html.ActionLink("返回首页", "Index", "Home",null, new { @class = "btn btn-default" })

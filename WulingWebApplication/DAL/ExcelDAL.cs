@@ -110,7 +110,7 @@ namespace WulingWebApplication.DAL
                         pv.变速器 = 变速器;
                         pv.后轮距 = (后轮距);
                         pv.品牌 = 品牌;
-                        pv.国产进口 = 国产进口;
+                        pv.国产_进口 = 国产进口;
                         pv.市 = 市;
                         pv.年龄 = (年龄);
                         pv.性别 = 性别;

@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "PrimaryQuery";
+}
+
+<h2 style="text-align:center">简单查询</h2>
+<div class="row" style="margin-left:20px">
+    <select id="cmbProvince" name="cmbProvince"></select>
+    <select id="cmbCity" name="cmbCity"></select>
+    <select id="cmbArea" name="cmbArea"></select>
+    <button id="queryBtn" class="btn btn-info" onclick="myQuery()">查询</button>
+</div>
+<div>
+    <table id="tableId" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <td>时间</td><td>省</td><td>市</td><td>县</td><td>制造商</td><td>车辆型号</td><td>品牌</td><td>车型</td><td>排量</td>	
+            </tr>
+        </thead>
+
+    </table>
+ </div>
+<script src="~/AppJs/ChineseArea.js"></script>
+<script>addressInit('cmbProvince', 'cmbCity', 'cmbArea','广西','柳州市','柳北区');</script>
+<script>
+    function myQuery() {
+        var province = $('#cmbProvince option:selected').val();
+        var city = $('#cmbCity option:selected').val();
+        var area = $('#cmbArea option:selected').val();
+        $.post("/Query/PrimaryQuery", { Province: province, City: city, County: area }, function (data, status) {
+            $("#tableId tbody").html("");
+            for (i = 0; i < data.length; i++) {
+                var item = "<tr><td>" + data[i].时间 + "</td><td>" + data[i].省 + "</td><td>" + data[i].市 + "</td><td>" + data[i].县 + "</td><td>" + data[i].制造商 + "</td><td>" + data[i].车辆型号+"</td><td>" + data[i].品牌 + "</td><td>" + data[i].车型 + "</td><td>" + data[i].排量 + "</td</tr>";
+                $("#tableId").append(item);
+            }
+                
+
+        });
+    }
+</script>
+

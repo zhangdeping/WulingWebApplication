@@ -15,7 +15,7 @@ namespace WulingWebApplication.Models
     public partial class PassengerVehicle
     {
         public string 时间 { get; set; }
-        public string 国产进口 { get; set; }
+        public string 国产_进口 { get; set; }
         public string 省 { get; set; }
         public string 市 { get; set; }
         public string 县 { get; set; }

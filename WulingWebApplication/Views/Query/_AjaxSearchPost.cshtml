@@ -1,0 +1,11 @@
+﻿@using Webdiyer.WebControls.Mvc
+@using WulingWebApplication.Models
+@model PagedList<PassengerVehicle>
+<div class="well well-sm">当前查询条件：省：<span class="emph">@Request.Form["Province"]</span>&nbsp;&nbsp;市：<span class="emph">@Request.Form["City"]</span>&nbsp;&nbsp;县：<span class="emph">@Request.Form["County"]</span></div>
+<div class="row  table-responsive">
+    @Html.Partial("_PassengerVehicleTable", Model)
+</div>
+<div>
+    <div style="float:left;width:50%">共 @Model.TotalPageCount 页 @Model.TotalItemCount 条记录，当前为第 @Model.CurrentPageIndex 页</div>
+    @Ajax.Pager(Model, new PagerOptions { PageIndexParameterName = "id", HtmlAttributes = new Dictionary<string, object> { { "style", "float:right" } }, PagerItemTemplate = "&nbsp;{0}" }, new MvcAjaxOptions { UpdateTargetId = "passengerVehicles", HttpMethod = "Post", DataFormId = "searchForm" })
+</div>

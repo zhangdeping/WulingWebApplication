@@ -438,7 +438,10 @@
                         <a href="#"><i class="fa fa-search"></i> <span class="nav-label">查询 </span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a  href="/Query/PrimaryQuery">基本查询</a>
+                                <a  href="/Query/PrimaryQuery">查询测试</a>
+                            </li>
+                            <li>
+                                <a href="/Query/MultiQuery">复杂查询</a>
                             </li>
                         </ul>
                     </li>
@@ -508,7 +511,7 @@
 
             </div>
             
-            <div class="row J_mainContent" id="content-main">
+            <div class="row " id="content-main">
 
 
                 @*<iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="index_v1.html?v=4.0" frameborder="0" data-id="index_v1.html" seamless>*@
@@ -526,7 +529,7 @@
                 <!--右侧部分结束-->
                 <!--右侧边栏开始-->
 
-            </div>
+   </div>
             <!-- 全局js -->
             <script src="~/UI/js/jquery.min.js?v=2.1.4"></script>
             <script src="~/UI/js/bootstrap.min.js?v=3.3.6"></script>
@@ -547,6 +550,7 @@
                     $('body').removeClass("mini-navbar");//展开左侧菜单导航
                 }
             </script>
+    @RenderSection("scripts", required: false)
 </body>
 </html>
 

@@ -31,8 +31,8 @@
                             <span><img alt="image" class="img-circle" src="~/UI/img/user.png" /></span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
-                                    <span class="block m-t-xs"><strong class="font-bold">Beaut-zihan</strong></span>
-                                    <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
+                                    <span class="block m-t-xs"><strong class="font-bold">@ViewData["user"]</strong></span>
+                                    @*<span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>*@
                                 </span>
                             </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
@@ -46,11 +46,11 @@
                                     <a class="J_menuItem" href="contacts.html">联系我们</a>
                                 </li>
                                 <li>
-                                    <a class="J_menuItem" href="mailbox.html">信箱</a>
+                                    <a  href="/Account/ChangePassWD">修改密码</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="login.html">安全退出</a>
+                                    <a href="/Account/Logout">安全退出</a>
                                 </li>
                             </ul>
                         </div>
@@ -476,9 +476,12 @@
         <div id="page-wrapper" class="gray-bg dashbard-1">
 
             <div class="row content-tabs" >
-                <button class="roll-nav roll-left J_tabLeft" onclick="hideSideMenu()">
-                    <i class="fa fa-backward"></i>
-                </button>
+                <div class="btn-group roll-nav roll-left">
+                    <button class="roll-nav roll-left J_tabLeft" onclick="hideSideMenu()">
+                        <i class="fa fa-backward"></i>
+                    </button>
+                </div>
+                
                 <nav class="page-tabs J_menuTabs">
                     <div class="page-tabs-content">
                         <a href="/home/index" class="active J_menuTab" data-id="index_v1.html">首页</a>
@@ -486,27 +489,13 @@
                 </nav>
 
                 
-                <button class="roll-nav roll-right J_tabRight" onclick="showSideMenu()">
-                    <i class="fa fa-forward"></i>
-                </button>
-                <div class="btn-group roll-nav roll-right">
-                    <button class="dropdown J_tabClose" data-toggle="dropdown">
-                        关闭操作<span class="caret"></span>
+               
+                <div class="btn-group roll-nav roll-right" style="width:45px">
+                    <button class="roll-nav roll-right" style="width:45px"onclick="showSideMenu()"  >
+                        <i class="fa fa-forward"></i>
                     </button>
-                    <ul role="menu" class="dropdown-menu dropdown-menu-right">
-                        <li class="J_tabShowActive">
-                            <a>定位当前选项卡</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li class="J_tabCloseAll">
-                            <a>关闭全部选项卡</a>
-                        </li>
-                        <li class="J_tabCloseOther">
-                            <a>关闭其他选项卡</a>
-                        </li>
-                    </ul>
+                   
                 </div>
-
                 <a href="/Account/Logout" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out btn-danger"></i> 退出</a>
 
             </div>

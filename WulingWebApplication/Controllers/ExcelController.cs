@@ -22,6 +22,7 @@ namespace WulingWebApplication.Controllers
         //private static readonly String Folder = "/files";
         public ActionResult Index()
         {
+            ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
             return View();
         }
 

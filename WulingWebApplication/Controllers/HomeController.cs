@@ -10,20 +10,21 @@ namespace WulingWebApplication.Controllers
     {
         public ActionResult Index()
         {
+            ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
             return View();
         }
 
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
+            ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
             return View();
         }
 
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
+            ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
             return View();
         }
     }

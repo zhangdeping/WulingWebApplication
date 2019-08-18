@@ -17,11 +17,13 @@ namespace WulingWebApplication.Controllers
     {
         public ActionResult Index()
         {
+            ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
             return View(RoleManager.Roles);
         }
 
         public ActionResult Create()
         {
+            ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
             return View();
         }
 
@@ -41,6 +43,7 @@ namespace WulingWebApplication.Controllers
                     AddErrorsFromResult(result);
                 }
             }
+            ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
             return View(name);
         }
 
@@ -53,15 +56,18 @@ namespace WulingWebApplication.Controllers
                 IdentityResult result = await RoleManager.DeleteAsync(role);
                 if (result.Succeeded)
                 {
+                    ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
                     return RedirectToAction("Index");
                 }
                 else
                 {
+                    ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
                     return View("Error", result.Errors);
                 }
             }
             else
             {
+                ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
                 return View("Error", new string[] { "Role Not Found" });
             }
         }
@@ -73,6 +79,7 @@ namespace WulingWebApplication.Controllers
             IEnumerable<AppUser> members
                     = UserManager.Users.Where(x => memberIDs.Any(y => y == x.Id));
             IEnumerable<AppUser> nonMembers = UserManager.Users.Except(members);
+            ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
             return View(new RoleEditModel
             {
                 Role = role,
@@ -92,6 +99,7 @@ namespace WulingWebApplication.Controllers
                     result = await UserManager.AddToRoleAsync(userId, model.RoleName);
                     if (!result.Succeeded)
                     {
+                        ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
                         return View("Error", result.Errors);
                     }
                 }
@@ -101,6 +109,7 @@ namespace WulingWebApplication.Controllers
                        model.RoleName);
                     if (!result.Succeeded)
                     {
+                        ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
                         return View("Error", result.Errors);
                     }
                 }
@@ -108,6 +117,7 @@ namespace WulingWebApplication.Controllers
                 
                 return RedirectToAction("Index");
             }
+            ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
             return View("Error", new string[] { "Role Not Found" });
         }
 
@@ -119,6 +129,7 @@ namespace WulingWebApplication.Controllers
         public async Task<ActionResult> UpdateAccessPowers(string id)
         {
             AppRole role = await  RoleManager.FindByIdAsync(id);
+            ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
             return View(role);
         }
 
@@ -135,6 +146,7 @@ namespace WulingWebApplication.Controllers
             {
                 return RedirectToAction("Index");
             }
+            ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
             return View("Error",new string[] { "更新"+role.Name+"角色的访问权限失败"});
         }
 

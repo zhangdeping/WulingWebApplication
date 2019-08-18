@@ -16,6 +16,8 @@ namespace WulingWebApplication.Infrastructure
                 = HttpContext.Current.GetOwinContext().GetUserManager<AppUserManager>();
             return new MvcHtmlString(mgr.FindByIdAsync(id).Result.UserName);
         }
+
+       
       
     }
 }

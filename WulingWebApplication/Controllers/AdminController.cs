@@ -17,11 +17,13 @@ namespace WulingWebApplication.Controllers
         // GET: Admin
         public ActionResult Index()
         {
+            ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
             return View(UserManager.Users);
         }
 
         public ActionResult Create()
         {
+            ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
             return View();
         }
 
@@ -41,6 +43,7 @@ namespace WulingWebApplication.Controllers
                     AddErrorsFromResult(result);
                 }
             }
+            ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
             return View(model);
         }
 
@@ -57,11 +60,13 @@ namespace WulingWebApplication.Controllers
                 }
                 else
                 {
+                    ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
                     return View("Error", result.Errors);
                 }
             }
             else
             {
+                ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
                 return View("Error", new string[] { "用户不存在！！" });
             }
         }
@@ -72,6 +77,7 @@ namespace WulingWebApplication.Controllers
             AppUser user = await UserManager.FindByIdAsync(id);
             if (user != null)
             {
+                ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
                 return View(user);
             }
             else
@@ -126,8 +132,12 @@ namespace WulingWebApplication.Controllers
             {
                 ModelState.AddModelError("", "User Not Found");
             }
+            ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
             return View(user);
         }
+
+        
+
         private void AddErrorsFromResult(IdentityResult result)
         {
             foreach (string error in result.Errors)

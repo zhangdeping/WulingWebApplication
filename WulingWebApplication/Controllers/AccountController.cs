@@ -21,9 +21,10 @@ namespace WulingWebApplication.Controllers
         {
             if (HttpContext.User.Identity.IsAuthenticated)
             {
-                return View("Error", new string[] { "已登录，当您没有权限！！！请先退出，再登录！！" });
+                return View("Error", new string[] { "已登录，您没有权限！！！请先退出，用正确的用户再登录！！" });
             }
             ViewBag.returnUrl = returnUrl;
+            ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
             return View();
         }
 
@@ -49,10 +50,15 @@ namespace WulingWebApplication.Controllers
                     {
                         IsPersistent = false
                     }, ident);
-                    return Redirect(returnUrl);
+                    if(returnUrl != "")
+                    {
+                        return Redirect(returnUrl);
+                    }
+                   
                 }
             }
             ViewBag.returnUrl = returnUrl;
+            ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
             return View(details);
         }
 
@@ -63,6 +69,31 @@ namespace WulingWebApplication.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult ChangePassWD()
+        {
+            ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
+            return View();
+        }
+
+        [HttpPost]
+        public string  ChangePassWD( string oldPassword,string newPassword)
+        {
+            AppUser user = UserManager.FindById(System.Web.HttpContext.Current.User.Identity.GetUserId()) ;
+            if(user == null)
+            {
+                return "用户未登录，请先登录！！";
+            }
+            if(UserManager.CheckPassword(user,oldPassword)==false)
+            {
+                return "旧密码不对";
+            }
+            IdentityResult result = UserManager.ChangePassword(user.Id, oldPassword, newPassword);
+            if (result.Succeeded==true)
+            {
+                return "Success";
+            }
+            return result.Errors.ToString();
+        }
         private IAuthenticationManager AuthManager
         {
             get

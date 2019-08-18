@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "修改密码";
+}
+
+<h2>修改个人密码</h2>
+<div method="post" action="/Account/ChangePassWD" class="form" >
+    <div class="form-group">
+        <label for="oldPWD" stype="display:inline;">旧密码：</label>
+        <input type="password" class="form-control" id="oldPWD" style="display:inline;width:200px;" autocomplete="off" />
+       
+    </div>
+    <div class="form-group">
+        <label for="password" style="display:inline;">密码：</label>
+        <input type="password" class="form-control" id="password" style="display:inline;width:200px;" autocomplete="off" />
+       
+    </div>
+    <div class="form-group">
+        <label for="confirmPassword" style="display:inline;">再次确认密码：</label>
+        <input type="password" class="form-control" id="confirmPassword" style="display:inline;width:200px;" autocomplete="off" />
+
+    </div>
+        <button type="submit" class="btn btn-primary" onclick="update()">修改</button>
+        <button type="reset" class="btn btn-primary" onclick="cancel()">取消</button>
+</div>
+<div >
+    <p id="info" style="font-size:larger;color:red"></p>
+</div>
+ 
+ <script>
+     function update()
+     {
+         var old = $('#oldPWD').val();
+         var first = $('#password').val();
+         var second = $('#confirmPassword').val();
+         if(first != second)
+         {
+             $('#info').text("两次输入的新密码不一致，请重新输入！！");
+             $('#password').val("");
+             $('#confirmPassword').val("");
+             return;
+         }
+         $.post("/Account/ChangePassWD", { oldPassword: old, newPassword: first }, function (data, status) {
+             if(data=="Success")
+             {
+                 $('#info').text("修改成功");
+                 //$('#password').val("");
+                 //$('#confirmPassword').val("");
+             }else
+             {
+                 $('#info').text(data);
+                 $('#password').val("");
+                 $('#confirmPassword').val("");
+             }
+         })
+     }
+
+     function cancel()
+     {
+         $('#info').innerHtml = ""
+         $('#password').val("");
+         $('#confirmPassword').val("");
+         $('#oldPWD').val("");
+     }
+ </script>
+

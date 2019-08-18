@@ -14,6 +14,7 @@ namespace WulingWebApplication.Controllers
         // GET: Query
         public ActionResult PrimaryQuery()
         {
+            ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
             return View();
         }
 
@@ -43,6 +44,7 @@ namespace WulingWebApplication.Controllers
                 var model = db.PassengerVehicles.OrderByDescending(a => a.时间).ToPagedList(id, 7);
                 if (Request.IsAjaxRequest())
                     return PartialView("_AjaxSearchPost", model);
+                ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
                 return View(model);
             }
             
@@ -73,6 +75,7 @@ namespace WulingWebApplication.Controllers
                 var model = qry.OrderByDescending(a => a.时间).ToPagedList(id, 7);
                 if (Request.IsAjaxRequest())
                     return PartialView("_AjaxSearchPost", model);
+                ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
                 return View(model);
             }
         }

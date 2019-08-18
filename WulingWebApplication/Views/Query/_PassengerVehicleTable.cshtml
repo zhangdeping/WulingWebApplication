@@ -1,7 +1,7 @@
 ﻿@using WulingWebApplication.Models
 @using Webdiyer.WebControls.Mvc
 @model PagedList<PassengerVehicle>
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped table-condensed table-hover " >
     <tr>
         <th class="nowrap">序号</th>
         <th>
@@ -25,6 +25,94 @@
         <th>
             @Html.DisplayNameFor(model => model.发动机型号)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.使用性质)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.保有量)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.准确排量)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.功率)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.前轮距)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.后轮距)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.变速器)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.国产_进口)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.年龄)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.性别)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.总质量)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.所有权)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.抵押标记)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.排放标准)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.排量)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.整备质量)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.核定载客)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.燃油类型)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.车型)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.车外廓宽)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.车外廓长)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.车外廓高)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.车身型式)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.车身颜色)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.车辆型号)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.车辆类型)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.轮胎规格)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.轴数)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.轴距)
+        </th>
+
         
     </tr>
     @{ int i = 0;}
@@ -53,6 +141,94 @@
             <td>
                 @Html.DisplayFor(modelItem => item.发动机型号)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.使用性质)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.保有量)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.准确排量)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.功率)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.前轮距)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.后轮距)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.变速器)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.国产_进口)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.年龄)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.性别)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.总质量)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.所有权)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.抵押标记)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.排放标准)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.排量)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.整备质量)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.核定载客)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.燃油类型)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.车型)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.车外廓宽)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.车外廓长)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.车外廓高)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.车身型式)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.车身颜色)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.车辆型号)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.车辆类型)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.轮胎规格)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.轴数)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.轴距)
+            </td>
+            
         </tr>
     }
 </table>

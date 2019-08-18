@@ -40,7 +40,7 @@ namespace WulingWebApplication.Controllers
         {
             using (var db = new WuLinEntities1())
             {
-                var model = db.PassengerVehicles.OrderByDescending(a => a.时间).ToPagedList(id, 15);
+                var model = db.PassengerVehicles.OrderByDescending(a => a.时间).ToPagedList(id, 7);
                 if (Request.IsAjaxRequest())
                     return PartialView("_AjaxSearchPost", model);
                 return View(model);
@@ -64,13 +64,13 @@ namespace WulingWebApplication.Controllers
             using (var db =  new WuLinEntities1())
             {
                 var qry = db.PassengerVehicles.AsQueryable();
-                if (!string.IsNullOrWhiteSpace(Province))
+                if (!string.IsNullOrWhiteSpace(Province) && !Province.Contains("请选择"))
                     qry = qry.Where(x => x.省.Contains(Province)|| Province.Contains(x.省));
-                if (!string.IsNullOrWhiteSpace(City))
+                if (!string.IsNullOrWhiteSpace(City) && !City.Contains("请选择"))
                     qry = qry.Where(x => x.市.Contains(City) || City.Contains(x.市));
-                //if (!string.IsNullOrWhiteSpace(County))
-                //    qry = qry.Where(x => x.县.Contains(County) || County.Contains(x.县));
-                var model = qry.OrderByDescending(a => a.时间).ToPagedList(id, 15);
+                if (!string.IsNullOrWhiteSpace(County) && !County.Contains("请选择"))
+                    qry = qry.Where(x => x.县.Contains(County) || County.Contains(x.县));
+                var model = qry.OrderByDescending(a => a.时间).ToPagedList(id, 7);
                 if (Request.IsAjaxRequest())
                     return PartialView("_AjaxSearchPost", model);
                 return View(model);

@@ -4,8 +4,9 @@
 <div style="margin:10px 10px 10px 10px">
     <fieldset>
         <legend>查询</legend>
-        @using (Html.BeginForm("MultiQuery", ViewContext.RouteData.GetRequiredString("controller"), new { id = "" }, FormMethod.Post, new { id = "searchForm" }))
-        {
+        @*@using (Html.BeginForm("MultiQuery", ViewContext.RouteData.GetRequiredString("controller"), new { id = "" }, FormMethod.Post, new { id = "searchForm" }))*@
+        @*{*@
+        <form action="/Query/MultiQuery" method="post" id="searchForm" onsubmit="return checkform();">
             @*<span>标题：</span>*@<input type="text" name="Province" id="Province" hidden style="width:120px" />
             @*<span>作者：</span>*@<input type="text" name="City" id="City" hidden style="width:120px" />@*<span>（如：Webdiyer）</span>*@
             @*<span>来源：</span>*@<input type="text" name="County" id="County" hidden style="width:120px" />@*<span>（如：吴起热线）</span>*@
@@ -13,7 +14,8 @@
             <select id="cmbCity" name="cmbCity"></select>
             <select id="cmbArea" name="cmbArea"></select>
             <input type="submit" value="搜索(S)" accesskey="S" />
-        }
+        </form>
+        @*}*@
     </fieldset>
     <div id="passengerVehicles">
         @Html.Partial("_AjaxSearchPost", Model)
@@ -24,7 +26,10 @@
     @{Html.RegisterMvcPagerScriptResource();}
     
     <script src="~/AppJs/ChineseArea.js"></script>
-    <script>addressInit('cmbProvince', 'cmbCity', 'cmbArea');</script> 
+    <script>
+        addressInit('cmbProvince', 'cmbCity', 'cmbArea');
+        
+    </script> 
     <script>
         $(function(){
             $('form').bind('submit', checkform);

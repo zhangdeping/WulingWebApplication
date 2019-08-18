@@ -2,7 +2,7 @@
 @using WulingWebApplication.Models
 @model PagedList<PassengerVehicle>
 <div class="well well-sm">当前查询条件：省：<span class="emph">@Request.Form["Province"]</span>&nbsp;&nbsp;市：<span class="emph">@Request.Form["City"]</span>&nbsp;&nbsp;县：<span class="emph">@Request.Form["County"]</span></div>
-<div class="row  table-responsive">
+<div @*class="pre-scrollable" style="height:auto; overflow:auto"*@>
     @Html.Partial("_PassengerVehicleTable", Model)
 </div>
 <div>

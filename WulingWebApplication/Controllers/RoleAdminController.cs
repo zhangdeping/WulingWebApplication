@@ -124,30 +124,124 @@ namespace WulingWebApplication.Controllers
         /// <summary>
         /// 更新角色的访问权限
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">角色id</param>
         /// <returns></returns>
         public async Task<ActionResult> UpdateAccessPowers(string id)
         {
             AppRole role = await  RoleManager.FindByIdAsync(id);
             ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
-            return View(role);
+            ViewData["Role"] = role;
+            List<Address> addressList = new List<Address>();
+            using (AppIdentityDbContext db = new AppIdentityDbContext())
+            {
+                addressList = db.Addresses.Where(x => x.Role.Id == id).ToList();
+            }
+
+                return View(addressList);
         }
 
-        [HttpPost]
-        public async Task<ActionResult> UpdateAccessPowers(AppRole role)
+        //[HttpPost]
+        //public async Task<ActionResult> UpdateAccessPowers(AppRole role)
+        //{
+        //    AppRole myRole = await RoleManager.FindByIdAsync(role.Id);
+        //    myRole.Name = role.Name;
+        //    myRole.AccessPowers = role.AccessPowers;
+            
+            
+        //    var result = await RoleManager.UpdateAsync(myRole);
+        //    if(result.Succeeded)
+        //    {
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
+        //    return View("Error",new string[] { "更新"+role.Name+"角色的访问权限失败"});
+        //}
+
+        /// <summary>
+        /// 增加访问地址
+        /// </summary>
+        /// <param name="id">AppRole 的Id</param>
+        /// <returns></returns>
+        public async Task<ActionResult> AddAddress(string id)
         {
-            AppRole myRole = await RoleManager.FindByIdAsync(role.Id);
-            myRole.Name = role.Name;
-            myRole.AccessPowers = role.AccessPowers;
+            AppRole role = await RoleManager.FindByIdAsync(id);
+            ViewData["Role"] = role;
+            return View();
+        }
+
+        /// <summary>
+        /// 增加访问地址
+        /// </summary>
+        /// <param name="id">AppRole 的Id</param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult> AddAddress(string Province,string City,string County,string roleId)
+        {
+            AppRole role =  RoleManager.FindById(roleId);
+            Address address = new Address();
+            address.Id = Guid.NewGuid();
+            address.Province = Province;
+            address.City = City;
+            address.County = County;
+            address.Role = role;
+            AppIdentityDbContext db = HttpContext.GetOwinContext().Get<AppIdentityDbContext>();
+            db.Addresses.Add(address);
+            await db.SaveChangesAsync();
             
-            
-            var result = await RoleManager.UpdateAsync(myRole);
-            if(result.Succeeded)
+            //ViewData["Role"] = role;
+            return RedirectToAction("UpdateAccessPowers",new {id=roleId });
+        }
+
+        /// <summary>
+        /// 删除访问地址
+        /// </summary>
+        /// <param name="id"> 地址id</param>
+        /// <returns></returns>
+        public async Task<string> DeleteAddress(string id)
+        {
+            AppIdentityDbContext db = HttpContext.GetOwinContext().Get<AppIdentityDbContext>();
+            var address = db.Addresses.Where(x => x.Id == new Guid(id)).FirstOrDefault();
+            if(address != null)
             {
-                return RedirectToAction("Index");
+                db.Addresses.Remove(address);
+                await db.SaveChangesAsync();
             }
-            ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
-            return View("Error",new string[] { "更新"+role.Name+"角色的访问权限失败"});
+
+            return "Success";
+        }
+
+        /// <summary>
+        /// 编辑地址
+        /// </summary>
+        /// <param name="id"> 地址id</param>
+        /// <returns></returns>
+        public async Task<ActionResult> EditAddress(string id,string roleId)
+        {
+            AppIdentityDbContext db = HttpContext.GetOwinContext().Get<AppIdentityDbContext>();
+            var address = db.Addresses.Where(x => x.Id == new Guid(id)).FirstOrDefault();
+            AppRole role = await RoleManager.FindByIdAsync(roleId);
+            ViewData["Role"] = role;
+            return View(address);
+        }
+
+        /// <summary>
+        /// 编辑地址
+        /// </summary>
+        /// <param name="id"> 地址id</param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult> EditAddress(Address address, string roleId)
+        {
+            AppIdentityDbContext db = HttpContext.GetOwinContext().Get<AppIdentityDbContext>();
+            var originalAddress = db.Addresses.Where(x => x.Id == address.Id).FirstOrDefault();
+            if(originalAddress != null)
+            {
+                originalAddress.Province = address.Province;
+                originalAddress.City = address.City;
+                originalAddress.County = address.County;
+            }
+            await db.SaveChangesAsync();
+            return RedirectToAction("UpdateAccessPowers", new { id = roleId });
         }
 
         private void AddErrorsFromResult(IdentityResult result)

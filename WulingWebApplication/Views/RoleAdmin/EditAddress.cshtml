@@ -1,0 +1,62 @@
+﻿@model WulingWebApplication.Models.Address
+@using WulingWebApplication.Models
+@{
+    ViewBag.Title = "修改地址";
+    AppRole role = ViewData["Role"]  as AppRole;
+
+}
+
+
+
+<div class="col-lg-offset-4 col-lg-4" style="margin-top:50px">
+    <fieldset>
+        <legend>修改 @role.Name 访问地址(原地址：@Model.Province+@Model.City+@Model.County)</legend>
+        @*@using (Html.BeginForm("MultiQuery", ViewContext.RouteData.GetRequiredString("controller"), new { id = "" }, FormMethod.Post, new { id = "searchForm" }))*@
+        @*{*@
+        <h3 style="text-align:left;color:#0094ff"> 选择新地址</h3>
+        <form action="/RoleAdmin/EditAddress/" method="post" id="searchForm" onsubmit="return checkform();" style="font-size:16px">
+            @*<span>标题：</span>*@<input type="text" name="Province" id="Province" value="@Model.Province" hidden style="width:120px" />
+            @*<span>作者：</span>*@<input type="text" name="City" id="City" value="@Model.City" hidden style="width:120px" />@*<span>（如：Webdiyer）</span>*@
+            @*<span>来源：</span>*@<input type="text" name="County" id="County" value="@Model.County" hidden style="width:120px" />@*<span>（如：吴起热线）</span>*@
+            <input type="text" name="roleId" id="roleId" readonly="readonly" value="@role.Id" hidden style="width:120px" />
+            <input type="text" name="Id" id="Id" readonly="readonly"  value="@Model.Id" hidden style="width:120px" />
+            <select id="cmbProvince" name="cmbProvince"></select>
+            <select id="cmbCity" name="cmbCity"></select>
+            <select id="cmbArea" name="cmbArea"></select>
+            <input type="submit" value="确定" class="btn-info" />
+        </form>
+        @*}*@
+    </fieldset>
+</div>
+
+
+<script src="~/AppJs/ChineseArea.js"></script>
+<script>
+    addressInit('cmbProvince', 'cmbCity', 'cmbArea');
+    @*$("#cmbProvince option[value='" +@Model.Province + "']").attr("selected", "selected");
+    $("#cmbCity option[value='" +@Model.City + "']").attr("selected", "selected");
+    $("#cmbCounty option[value='" +@Model.County + "']").attr("selected", "selected");*@
+
+</script>
+<script>
+    $(function () {
+       
+            $('form').bind('submit', checkform);
+
+        })
+
+  
+
+        function checkform() {
+
+            //alert("check");
+            $('#Province').val($('#cmbProvince option:selected').val());
+            $('#City').val($('#cmbCity option:selected').val());
+            $('#County').val($('#cmbArea option:selected').val());
+
+
+            return true;
+
+
+        }
+</script>

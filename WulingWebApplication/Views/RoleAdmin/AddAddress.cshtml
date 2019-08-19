@@ -1,39 +1,41 @@
 ﻿@using WulingWebApplication.Models
-@using Webdiyer.WebControls.Mvc
-@model PagedList<PassengerVehicle>
-<div style="margin:10px 10px 10px 10px">
+@{
+    ViewBag.Title = "增加地址";
+    AppRole role = ViewData["Role"] as AppRole;
+   
+}
+
+<h2  style="text-align:center">为 @role.Name 增加可访问的区域地址</h2>
+
+<div class="col-lg-offset-4 col-lg-4">
     <fieldset>
-        <legend>查询 </legend>
+        <legend>增加地址</legend>
         @*@using (Html.BeginForm("MultiQuery", ViewContext.RouteData.GetRequiredString("controller"), new { id = "" }, FormMethod.Post, new { id = "searchForm" }))*@
         @*{*@
-        <form action="/Query/MultiQuery" method="post" id="searchForm" onsubmit="return checkform();">
+        <form action="/RoleAdmin/AddAddress/" method="post" id="searchForm" onsubmit="return checkform();">
             @*<span>标题：</span>*@<input type="text" name="Province" id="Province" hidden style="width:120px" />
             @*<span>作者：</span>*@<input type="text" name="City" id="City" hidden style="width:120px" />@*<span>（如：Webdiyer）</span>*@
             @*<span>来源：</span>*@<input type="text" name="County" id="County" hidden style="width:120px" />@*<span>（如：吴起热线）</span>*@
+            <input type="text" name="roleId" id="roleId" readonly="readonly" value="@role.Id" hidden style="width:120px" />
             <select id="cmbProvince" name="cmbProvince"></select>
             <select id="cmbCity" name="cmbCity"></select>
             <select id="cmbArea" name="cmbArea"></select>
-            <input type="submit" value="搜索(S)" accesskey="S" />
+            <input type="submit" value="确定" accesskey="S" />
         </form>
         @*}*@
     </fieldset>
-    <div id="passengerVehicles">
-        @Html.Partial("_AjaxSearchPost", Model)
-    </div>
 </div>
-@section Scripts{
-    
-    @{Html.RegisterMvcPagerScriptResource();}
-    
-    <script src="~/AppJs/ChineseArea.js"></script>
-    <script>
+
+
+<script src="~/AppJs/ChineseArea.js"></script>
+<script>
         addressInit('cmbProvince', 'cmbCity', 'cmbArea');
-        
-    </script> 
-    <script>
+
+</script>
+<script>
         $(function(){
             $('form').bind('submit', checkform);
-            
+
         })
 
   
@@ -50,9 +52,4 @@
 
 
         }
-    </script>
-    }
-
-
-
-
+</script>

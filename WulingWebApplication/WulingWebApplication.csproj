@@ -235,6 +235,7 @@
     <Compile Include="Infrastructure\AppRoleManager.cs" />
     <Compile Include="Infrastructure\AppUserManager.cs" />
     <Compile Include="Infrastructure\IdentityHelpers.cs" />
+    <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AppRole.cs" />
     <Compile Include="Models\AppUser.cs" />
     <Compile Include="Models\Model1.Context.cs">
@@ -875,6 +876,8 @@
     <Content Include="Views\Query\_AjaxSearchPost.cshtml" />
     <Content Include="Views\Query\_PassengerVehicleTable.cshtml" />
     <Content Include="Views\Account\ChangePassWD.cshtml" />
+    <Content Include="Views\RoleAdmin\AddAddress.cshtml" />
+    <Content Include="Views\RoleAdmin\EditAddress.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

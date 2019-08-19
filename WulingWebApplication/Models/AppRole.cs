@@ -9,7 +9,7 @@ namespace WulingWebApplication.Models
 {
     public class AppRole : IdentityRole
     {
-        //用于存储该角色可以访问的范围：比如江西省和湖南省或柳州市，以逗号分割
+        //用于存储该角色可以访问的范围（弃用），改成Addresses数据表存储
         [Column(TypeName = "nvarchar(MAX)")]
         public string AccessPowers { get; set; }
         public AppRole() : base() { }

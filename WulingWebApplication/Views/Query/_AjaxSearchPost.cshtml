@@ -1,7 +1,7 @@
 ﻿@using Webdiyer.WebControls.Mvc
 @using WulingWebApplication.Models
 @model PagedList<PassengerVehicle>
-<div class="well well-sm">当前查询条件：省：<span class="emph">@Request.Form["Province"]</span>&nbsp;&nbsp;市：<span class="emph">@Request.Form["City"]</span>&nbsp;&nbsp;县：<span class="emph">@Request.Form["County"]</span></div>
+<div class="well well-sm">当前查询条件：省：<span class="emph">@Request.Form["Province"]</span>&nbsp;&nbsp;市：<span class="emph">@Request.Form["City"]</span>&nbsp;&nbsp;县：<span class="emph">@Request.Form["County"]</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">@ViewData["info"]</span></div>
 <div @*class="pre-scrollable" style="height:auto; overflow:auto"*@>
     @Html.Partial("_PassengerVehicleTable", Model)
 </div>

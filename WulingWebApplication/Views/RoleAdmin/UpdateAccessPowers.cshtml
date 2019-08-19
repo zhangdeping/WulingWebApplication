@@ -1,45 +1,140 @@
-﻿@model WulingWebApplication.Models.AppRole
-
+﻿@model List<WulingWebApplication.Models.Address>
+@using WulingWebApplication.Models
 @{
     ViewBag.Title = "更新角色访问权限";
+    AppRole role = ViewData["Role"] as AppRole;
+
+    //string recordId = "";
+    //string province = "";
+    //string city = "";
+    //string county = "";
 }
 
-    <h2>更新角色访问权限</h2>
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>角色</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" ,@readOnly = "readOnly "} })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.AccessPowers, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.AccessPowers, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.AccessPowers, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="保存" class="btn btn-default" />
-            </div>
-        </div>
+    <h2 style="text-align:center">更新 @role.Name 角色的访问权限</h2>
+<div class="col-lg-offset-2 col-lg-8">
+    <div class="row">
+        <a class='btn btn-info  col-lg-offset-10' href="/RoleAdmin/AddAddress/@role.Id"><i class='fa fa-plus'></i> 新建数据</a>
     </div>
-}
+    <div>
+        <table id="tableId" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>序号</th><th>省</th><th>市</th><th>县</th><th class="col-lg-2">操作</th>
+                </tr>
+            </thead>
+            @{ int count = 1;}
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td hidden class="addressId">@item.Id</td>
+                    <td>@count</td>
+                    @{ count++;}
+                    <td class="province">@item.Province</td>
+                    <td class="city">@item.City</td>
+                    <td class="county">@item.County</td>
+                    <td><button class="btn btn-info btn-sm edit" href="#">编辑<i class="fa fa-pencil"></i></button>&nbsp; &nbsp; <button class="btn btn-danger btn-sm remove"  style="border:none">删除<i class="fa fa-times"></i></button></td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div>
+        @Html.ActionLink("返回角色管理列表", "Index")
+    </div>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    删除数据
+                </h4>
+            </div>
+            <div class="modal-body">
+                <P style="color:red">您确定要删除该记录吗？删除后将无法回复！！！</P>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">
+                    取消
+                </button>
+                <button type="button" onclick="deleteAddress()" class="btn btn-danger">
+                    删除
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script>
+        
+        $(function () {
+            $("#tableId").on('click', '.remove', function () {
+                //if ($(this).text == "保存")
+                {
+
+                   
+                    currentTr = $(this).parent().parent();
+                     addressId= currentTr.find("td:eq(0)").text();
+                    province  = currentTr.find("td:eq(1)").text();
+                     city= currentTr.find("td:eq(2)").text();
+                     county = currentTr.find("td:eq(3)").text();
+
+                     $('#myModal').modal('show');
+
+                   
+                }
+
+            });
+        })
+
+
+        $(function () {
+            $("#tableId").on('click', '.edit', function () {
+                //if ($(this).text == "保存")
+                {
+
+
+                    currentTr = $(this).parent().parent();
+                    addressId = currentTr.find("td:eq(0)").text();
+                    province = currentTr.find("td:eq(1)").text();
+                    city = currentTr.find("td:eq(2)").text();
+                    county = currentTr.find("td:eq(3)").text();
+
+                    RoleId = "@role.Id"
+
+                    window.location.href = '/RoleAdmin/EditAddress/?id=' + addressId + '&roleId=' + RoleId;
+
+                    //$.get("/RoleAdmin/EditAddress", { id: addressId, roleId: RoleId }, function (data, status) {
+
+                    //});
+
+
+                }
+
+            });
+        })
+
+
+        function deleteAddress()
+        {
+            $.get('/RoleAdmin/DeleteAddress', { id: addressId },
+                       function (text, status) {
+                           currentTr.remove();
+                           $('#myModal').modal('hide');
+                           //alert(text);
+                           //isDelete = status;
+                       });
+            //if (isDelete == "success") {
+
+            //}
+        }
+
+    </script>

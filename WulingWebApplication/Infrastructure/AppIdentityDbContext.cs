@@ -11,6 +11,7 @@ namespace WulingWebApplication.Infrastructure
 {
     public class AppIdentityDbContext:IdentityDbContext<AppUser>
     {
+        public DbSet<Address> Addresses { get; set; }
         public AppIdentityDbContext() : base("IdentityDb") { }
         static AppIdentityDbContext()
         {

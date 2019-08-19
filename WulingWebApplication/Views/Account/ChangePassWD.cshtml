@@ -3,29 +3,38 @@
     ViewBag.Title = "修改密码";
 }
 
-<h2>修改个人密码</h2>
-<div method="post" action="/Account/ChangePassWD" class="form" >
-    <div class="form-group">
-        <label for="oldPWD" stype="display:inline;">旧密码：</label>
-        <input type="password" class="form-control" id="oldPWD" style="display:inline;width:200px;" autocomplete="off" />
-       
-    </div>
-    <div class="form-group">
-        <label for="password" style="display:inline;">密码：</label>
-        <input type="password" class="form-control" id="password" style="display:inline;width:200px;" autocomplete="off" />
-       
-    </div>
-    <div class="form-group">
-        <label for="confirmPassword" style="display:inline;">再次确认密码：</label>
-        <input type="password" class="form-control" id="confirmPassword" style="display:inline;width:200px;" autocomplete="off" />
-
-    </div>
-        <button type="submit" class="btn btn-primary" onclick="update()">修改</button>
-        <button type="reset" class="btn btn-primary" onclick="cancel()">取消</button>
-</div>
-<div >
+<h2 style="text-align:center;margin-top:100px">修改个人密码</h2>
+<div class="col-lg-offset-4 col-lg-4">
     <p id="info" style="font-size:larger;color:red"></p>
 </div>
+<div method="post" action="/Account/ChangePassWD" class="form col-lg-offset-4 col-lg-4" >
+    <div class="form-group">
+        <div class="row">
+            <label for="oldPWD" stype="display:inline;" class="col-lg-4">旧密码：</label>
+            <input type="password" class="form-control col-lg-6" id="oldPWD" autocomplete="off" />
+        </div>
+       
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <label for="password" style="display:inline;" class="col-lg-4">密码：</label>
+            <input type="password" class="form-control col-lg-6" id="password" autocomplete="off" />
+        </div>
+       
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <label for="confirmPassword" style="display:inline;" class="col-lg-4">再次确认密码：</label>
+            <input type="password" class="form-control col-lg-6" id="confirmPassword" autocomplete="off" />
+        </div>
+
+    </div>
+    <div class="row">
+        <button type="submit" class="btn btn-info col-lg-2 col-lg-offset-2 left" onclick="update()">修改</button>
+        <button type="reset" class="btn btn-danger col-lg-2 col-lg-offset-4 right " onclick="cancel()">取消</button>
+    </div>
+</div>
+
  
  <script>
      function update()

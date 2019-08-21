@@ -1,0 +1,15 @@
+﻿@using Webdiyer.WebControls.Mvc
+@using WulingWebApplication.Infrastructure
+@model PagedList<MyDynamicType>
+<div class="well well-sm">当前查询条件：省：<span class="emph">@Request.Form["Province"]</span>&nbsp;&nbsp;市：<span class="emph">@Request.Form["City"]</span>&nbsp;&nbsp;县：<span class="emph">@Request.Form["County"]</span>&nbsp;&nbsp;其它字段：<span class="emph">@Request.Form["CheckValues"]</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">@ViewData["info"]</span></div>
+<div @*class="pre-scrollable" style="height:auto; overflow:auto"*@>
+    @Html.Partial("_PassengerVehicleTable", Model)
+</div>
+<div>
+    @if (Model != null)
+    {
+        <div style="float:left;width:50%">共 @Model.TotalPageCount 页 @Model.TotalItemCount 条记录，当前为第 @Model.CurrentPageIndex 页</div>
+        @Ajax.Pager(Model, new PagerOptions { PageIndexParameterName = "id", HtmlAttributes = new Dictionary<string, object> { { "style", "float:right" } }, PagerItemTemplate = "&nbsp;{0}" }, new MvcAjaxOptions { UpdateTargetId = "passengerVehicles", HttpMethod = "Post", DataFormId = "searchForm" })
+    }
+    
+</div>

@@ -1,0 +1,85 @@
+﻿@using WulingWebApplication.Infrastructure
+@using Webdiyer.WebControls.Mvc
+@model PagedList<MyDynamicType>
+<div style="margin:10px 10px 10px 10px">
+    <fieldset>
+        <legend>统计 </legend>
+        @*@using (Html.BeginForm("MultiQuery", ViewContext.RouteData.GetRequiredString("controller"), new { id = "" }, FormMethod.Post, new { id = "searchForm" }))*@
+        @*{*@
+        <form action="/Statistics/MultiStatistics" method="post" id="searchForm" onsubmit="return checkform();">
+            @*<span>标题：</span>*@<input type="text" name="Province" id="Province" hidden  />
+            @*<span>作者：</span>*@<input type="text" name="City" id="City" hidden  />@*<span>（如：Webdiyer）</span>*@
+            @*<span>来源：</span>*@<input type="text" name="County" id="County" hidden  />@*<span>（如：吴起热线）</span>*@
+            <input type="text" name="CheckValues" id="CheckValues" hidden  />
+            <select id="cmbProvince" name="cmbProvince"></select>
+            <select id="cmbCity" name="cmbCity"></select>
+            <select id="cmbArea" name="cmbArea"></select>&nbsp;&nbsp;
+            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="时间"/>时间&nbsp;&nbsp;                 <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="品牌" />品牌&nbsp;&nbsp;
+            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="制造商" />制造商&nbsp;&nbsp;            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="发动机型号" />发动机型号&nbsp;&nbsp;
+            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="使用性质" />使用性质&nbsp;&nbsp;        <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="准确排量" />准确排量&nbsp;&nbsp;
+            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="功率" />功率&nbsp;&nbsp;                <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="前轮距" />前轮距&nbsp;&nbsp;
+            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="后轮距" />后轮距&nbsp;&nbsp;            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="变速器" />变速器&nbsp;&nbsp;
+            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="国产_进口" />国产_进口&nbsp;&nbsp;      <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="年龄" />年龄&nbsp;&nbsp;
+            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="性别" />性别&nbsp;&nbsp;                <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="总质量" />总质量&nbsp;&nbsp;
+            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="所有权" />所有权&nbsp;&nbsp;            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="抵押标记" />抵押标记&nbsp;&nbsp;
+            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="排放标准" />排放标准&nbsp;&nbsp;        <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="排量" />排量&nbsp;&nbsp;
+            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="整备质量" />整备质量&nbsp;&nbsp;        <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="核定载客" />核定载客&nbsp;&nbsp;
+            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="燃油类型" />燃油类型&nbsp;&nbsp;        <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="车型" />车型&nbsp;&nbsp;
+            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="车外廓宽" />车外廓宽&nbsp;&nbsp;        <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="车外廓长" />车外廓长&nbsp;&nbsp;
+            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="车外廓高" />车外廓高&nbsp;&nbsp;        <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="车身型式" />车身型式&nbsp;&nbsp;
+            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="车身颜色" />车身颜色&nbsp;&nbsp;        <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="车辆型号" />车辆型号&nbsp;&nbsp;
+            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="车身颜色" />车身颜色&nbsp;&nbsp;        <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="车辆型号" />车辆型号&nbsp;&nbsp;
+            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="车辆类型" />车辆类型&nbsp;&nbsp;        <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="轮胎规格" />轮胎规格&nbsp;&nbsp;
+            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="轴数" />轴数&nbsp;&nbsp;                <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="轴距" />轴距&nbsp;&nbsp;
+
+            <input type="submit" value="统计所选字段"  />
+        </form>
+        @*}*@
+    </fieldset>
+    <div id="passengerVehicles">
+        @Html.Partial("_AjaxSearchPost", Model)
+    </div>
+</div>
+@section Scripts{
+    
+    @{Html.RegisterMvcPagerScriptResource();}
+    
+    <script src="~/AppJs/ChineseArea.js"></script>
+    <script>
+        addressInit('cmbProvince', 'cmbCity', 'cmbArea');
+        
+    </script> 
+    <script>
+        $(function(){
+            $('form').bind('submit', checkform);
+            
+        })
+
+  
+
+        function checkform() {
+
+            //alert("check");
+            $('#Province').val($('#cmbProvince option:selected').val());
+            $('#City').val($('#cmbCity option:selected').val());
+            $('#County').val($('#cmbArea option:selected').val());
+
+            var checkValue = "";//定义一个空数组 
+            $("input[name='param']:checked").each(function (i) {//把所有被选中的复选框的值存入数组
+                checkValue +=$(this).val()+" ";
+            });
+            
+            console.log(checkValue);
+            $('#CheckValues').val(checkValue.trim());
+
+
+            return true;
+
+
+        }
+    </script>
+    }
+
+
+
+

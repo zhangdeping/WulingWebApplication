@@ -1,0 +1,58 @@
+﻿@using WulingWebApplication.Infrastructure
+@using Webdiyer.WebControls.Mvc
+@model PagedList<MyDynamicType>
+
+<table class="table table-bordered table-striped table-condensed table-hover ">
+    @{
+        List<string> Names = new List<string>();
+        if (Model !=null && Model.Count > 0)
+        {
+            
+                <tr>
+                    <th class="nowrap">序号</th>
+            
+            @foreach (System.Reflection.PropertyInfo p in Model[0].GetType().GetProperties())
+            {
+                if (p.GetValue(Model[0]) != null)
+                {
+                    <th>
+                        @p.Name
+                    </th>
+                }
+
+                //Console.WriteLine("Name:{0} Value:{1}", p.Name, p.GetValue(userInfo));
+            }
+           
+           </tr>
+           
+        }
+
+    }
+
+
+
+    @{ int i = 0;}
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>@(Model.StartItemIndex + i++)</td>
+                @foreach (System.Reflection.PropertyInfo p in item.GetType().GetProperties())
+                {
+                    if (p.GetValue(item) != null)
+                    {
+                        <td>
+                            @p.GetValue(item)
+                        </td>
+                    }
+
+                    //Console.WriteLine("Name:{0} Value:{1}", p.Name, p.GetValue(userInfo));
+                }
+             
+
+            </tr>
+        }
+    }
+
+</table>

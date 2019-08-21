@@ -32,12 +32,12 @@ namespace WulingWebApplication.Controllers
         {
             using (var db = new WuLinEntities1())
             {
-                //ViewData["info"] = "当前数据为示例数据。。。";
-                //var model = db.PassengerVehicles.Take(1).OrderByDescending(a => a.时间).ToPagedList(id, 1);
-                //if (Request.IsAjaxRequest())
-                //    return PartialView("_AjaxSearchPost", model);
+                ViewData["info"] = "当前数据为示例数据。。。";
+                var model = new List<MyDynamicType>() { new MyDynamicType { 品牌 = "大众", 合计 = 100 } }.ToPagedList(id, 1);
+                if (Request.IsAjaxRequest())
+                    return PartialView("_AjaxSearchPost", model);
                 ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
-                return View();
+                return View(model);
             }
 
         }
@@ -56,12 +56,15 @@ namespace WulingWebApplication.Controllers
         {
             if(CheckValues == "" || CheckValues == null)
             {
+                ViewData["info"] = "当前数据为示例数据。。。";
+                var model1 = new List<MyDynamicType>() { new MyDynamicType { 品牌 = "大众", 合计 = 100 } }.ToPagedList(id, 1);
                 if (Request.IsAjaxRequest())
-                    return PartialView("_AjaxSearchPost", null);
-                return View();
+                    return PartialView("_AjaxSearchPost", model1);
+                ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
+                return View(model1);
             }
             string[] statisticsParam = CheckValues.Split(' ');
-            string groupParams = CheckValues.Replace(' ', ',');
+            string groupParams = CheckValues.Replace(' ', ',').Replace('_','/');
             string errorMessage = "";
             errorMessage = "";
             //using (var db = new WuLinEntities1())
@@ -71,7 +74,7 @@ namespace WulingWebApplication.Controllers
             if (userName == null || userName == "")
             {
                 errorMessage = "您没有权限查询该地域的数据！！";
-
+                ViewData["info"] = errorMessage;
                 return null;
             }
 
@@ -80,7 +83,7 @@ namespace WulingWebApplication.Controllers
             if (listAddress == null || listAddress.Count == 0)
             {
                 errorMessage = "您没有权限查询该地域的数据！！";
-
+                ViewData["info"] = errorMessage;
                 return null;
             }
 
@@ -100,7 +103,7 @@ namespace WulingWebApplication.Controllers
                 if (isInProvince == false)
                 {
                     errorMessage = "您没有权限查询该地域的数据！！当前数据为示例数据。。。";
-
+                    ViewData["info"] = errorMessage;
                     return null;
                 }
                 List<Address> provinceAddressList = new List<Address>();//记录含有本函数Province参数值的地址
@@ -125,6 +128,7 @@ namespace WulingWebApplication.Controllers
                     if (isInCity == false)
                     {
                         errorMessage = "您没有权限查询该地域的数据！！";
+                        ViewData["info"] = errorMessage;
 
                         return null;
                     }
@@ -150,6 +154,7 @@ namespace WulingWebApplication.Controllers
                         if (isInCounty == false)
                         {
                             errorMessage = "您没有权限查询该地域的数据！！";
+                            ViewData["info"] = errorMessage;
 
                             return null;
                         }
@@ -204,7 +209,7 @@ namespace WulingWebApplication.Controllers
                 if (userName == null || userName == "")
                 {
                     errorMessage = "您没有权限查询该地域的数据！！";
-                   
+                    ViewData["info"] = errorMessage;
                     return null;
                 }
 

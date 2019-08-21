@@ -6,10 +6,8 @@
     @Html.Partial("_PassengerVehicleTable", Model)
 </div>
 <div>
-    @if (Model != null)
-    {
-        <div style="float:left;width:50%">共 @Model.TotalPageCount 页 @Model.TotalItemCount 条记录，当前为第 @Model.CurrentPageIndex 页</div>
-        @Ajax.Pager(Model, new PagerOptions { PageIndexParameterName = "id", HtmlAttributes = new Dictionary<string, object> { { "style", "float:right" } }, PagerItemTemplate = "&nbsp;{0}" }, new MvcAjaxOptions { UpdateTargetId = "passengerVehicles", HttpMethod = "Post", DataFormId = "searchForm" })
-    }
+    <div style="float:left;width:50%">共 @Model.TotalPageCount 页 @Model.TotalItemCount 条记录，当前为第 @Model.CurrentPageIndex 页</div>
+    @Ajax.Pager(Model, new PagerOptions { PageIndexParameterName = "id", HtmlAttributes = new Dictionary<string, object> { { "style", "float:right" } }, PagerItemTemplate = "&nbsp;{0}" }, new MvcAjaxOptions { UpdateTargetId = "passengerVehicles", HttpMethod = "Post", DataFormId = "searchForm" })
+ 
     
 </div>

@@ -8,7 +8,7 @@ namespace WulingWebApplication.Infrastructure
 {
     public class MyDynamicType:DynamicObject
     {
-        public int 合计 { get; set; }
+        
         public string 时间 { get; set; }
         public string 国产_进口 { get; set; }
         public string 省 { get; set; }
@@ -45,6 +45,8 @@ namespace WulingWebApplication.Infrastructure
         public string 前轮距 { get; set; }
         public string 后轮距 { get; set; }
         public Nullable<int> 保有量 { get; set; }
+
+        public int 合计 { get; set; }
 
 
         Dictionary<string, object> Properties = new Dictionary<string, object>();

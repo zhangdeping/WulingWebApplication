@@ -61,15 +61,20 @@ namespace WulingWebApplication.Controllers
             string[] statisticsParam = CheckValues.Split(' ');
             //statisticsParam[statisticsParam.Length] = "合计";
             List<string> fields = new List<string>();
-            if(statisticsParam.Length>0)
+            
+            string groupParams = CheckValues.Replace(' ', ',').Replace("国产_进口", "[国产/进口]");
+            string selectParams = groupParams.Replace("[国产/进口]", "[国产/进口] as 国产进口");
+            if (statisticsParam.Length > 0)
             {
                 fields.AddRange(statisticsParam);//返回给前端，字段名集合
             }
-            
-            fields.Add("合计");
-            string groupParams = CheckValues.Replace(' ', ',').Replace("国产_进口", "[国产/进口]");
-            string selectParams = groupParams.Replace("[国产/进口]", "[国产/进口] as 国产进口");
 
+            fields.Add("合计");
+            if(fields.Contains("国产_进口"))
+            {
+                fields.Remove("国产_进口");
+                fields.Add("国产进口");
+            }
             string errorMessage = "";
             errorMessage = "";
             //using (var db = new WuLinEntities1())
@@ -241,6 +246,7 @@ namespace WulingWebApplication.Controllers
             }
 
             esql += @" group by " + @groupParams;
+            esql += @" order by " + groupParams.Split(',')[0];
 
             var items = db.Database.SqlQuery<MyDynamicType> (esql);
 

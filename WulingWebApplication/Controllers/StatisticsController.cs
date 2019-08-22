@@ -33,6 +33,10 @@ namespace WulingWebApplication.Controllers
             using (var db = new WuLinEntities1())
             {
                 ViewData["info"] = "当前数据为示例数据。。。";
+                var fields = new List<string>();
+                fields.Add("品牌");
+                fields.Add("合计");
+                ViewData["fields"] = fields;
                 var model = new List<MyDynamicType>() { new MyDynamicType { 品牌 = "大众", 合计 = 100 } }.ToPagedList(id, 1);
                 if (Request.IsAjaxRequest())
                     return PartialView("_AjaxSearchPost", model);
@@ -54,28 +58,52 @@ namespace WulingWebApplication.Controllers
         [HttpPost]
         public ActionResult MultiStatistics(string Province, string City, string County, int id=1, string CheckValues ="")
         {
-            if(CheckValues == "" || CheckValues == null)
+            string[] statisticsParam = CheckValues.Split(' ');
+            //statisticsParam[statisticsParam.Length] = "合计";
+            List<string> fields = new List<string>();
+            if(statisticsParam.Length>0)
+            {
+                fields.AddRange(statisticsParam);//返回给前端，字段名集合
+            }
+            
+            fields.Add("合计");
+            string groupParams = CheckValues.Replace(' ', ',').Replace("国产_进口", "[国产/进口]");
+            string selectParams = groupParams.Replace("[国产/进口]", "[国产/进口] as 国产进口");
+
+            string errorMessage = "";
+            errorMessage = "";
+            //using (var db = new WuLinEntities1())
+            //var qry = GetOriginData(Province, City, County, out errorMessage);
+            ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
+
+            if (CheckValues == "" || CheckValues == null)
             {
                 ViewData["info"] = "当前数据为示例数据。。。";
+                fields = new List<string>();
+                fields.Add("品牌");
+                fields.Add("合计");
+                ViewData["fields"] = fields;
                 var model1 = new List<MyDynamicType>() { new MyDynamicType { 品牌 = "大众", 合计 = 100 } }.ToPagedList(id, 1);
                 if (Request.IsAjaxRequest())
                     return PartialView("_AjaxSearchPost", model1);
                 ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
                 return View(model1);
             }
-            string[] statisticsParam = CheckValues.Split(' ');
-            string groupParams = CheckValues.Replace(' ', ',').Replace('_','/');
-            string errorMessage = "";
-            errorMessage = "";
-            //using (var db = new WuLinEntities1())
-            //var qry = GetOriginData(Province, City, County, out errorMessage);
-            ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
+            
             string userName = System.Web.HttpContext.Current.User.Identity.Name;
             if (userName == null || userName == "")
             {
                 errorMessage = "您没有权限查询该地域的数据！！";
                 ViewData["info"] = errorMessage;
-                return null;
+                fields = new List<string>();
+                fields.Add("品牌");
+                fields.Add("合计");
+                ViewData["fields"] = fields;
+                var model1 = new List<MyDynamicType>() { new MyDynamicType { 品牌 = "大众", 合计 = 100 } }.ToPagedList(id, 1);
+                if (Request.IsAjaxRequest())
+                    return PartialView("_AjaxSearchPost", model1);
+                ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
+                return View(model1);
             }
 
             AppUser user = UserManager.FindByName(userName);
@@ -84,7 +112,15 @@ namespace WulingWebApplication.Controllers
             {
                 errorMessage = "您没有权限查询该地域的数据！！";
                 ViewData["info"] = errorMessage;
-                return null;
+                fields = new List<string>();
+                fields.Add("品牌");
+                fields.Add("合计");
+                ViewData["fields"] = fields;
+                var model1 = new List<MyDynamicType>() { new MyDynamicType { 品牌 = "大众", 合计 = 100 } }.ToPagedList(id, 1);
+                if (Request.IsAjaxRequest())
+                    return PartialView("_AjaxSearchPost", model1);
+                ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
+                return View(model1);
             }
 
             if (AddressListProvinceContainAll(listAddress) == false)//地址列表中没有全部省份
@@ -104,7 +140,15 @@ namespace WulingWebApplication.Controllers
                 {
                     errorMessage = "您没有权限查询该地域的数据！！当前数据为示例数据。。。";
                     ViewData["info"] = errorMessage;
-                    return null;
+                    fields = new List<string>();
+                    fields.Add("品牌");
+                    fields.Add("合计");
+                    ViewData["fields"] = fields;
+                    var model1 = new List<MyDynamicType>() { new MyDynamicType { 品牌 = "大众", 合计 = 100 } }.ToPagedList(id, 1);
+                    if (Request.IsAjaxRequest())
+                        return PartialView("_AjaxSearchPost", model1);
+                    ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
+                    return View(model1);
                 }
                 List<Address> provinceAddressList = new List<Address>();//记录含有本函数Province参数值的地址
                 foreach (var item in listAddress)
@@ -127,10 +171,18 @@ namespace WulingWebApplication.Controllers
                     }
                     if (isInCity == false)
                     {
-                        errorMessage = "您没有权限查询该地域的数据！！";
+                        errorMessage = "您没有权限查询该地域的数据！！当前数据为示例数据。。。";
                         ViewData["info"] = errorMessage;
+                        fields = new List<string>();
+                        fields.Add("品牌");
+                        fields.Add("合计");
+                        ViewData["fields"] = fields;
 
-                        return null;
+                        var model1 = new List<MyDynamicType>() { new MyDynamicType { 品牌 = "大众", 合计 = 100 } }.ToPagedList(id, 1);
+                        if (Request.IsAjaxRequest())
+                            return PartialView("_AjaxSearchPost", model1);
+                        ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
+                        return View(model1);
                     }
 
                     List<Address> CityAddressList = new List<Address>();//记录对应省含有本函数City参数值的地址
@@ -153,34 +205,42 @@ namespace WulingWebApplication.Controllers
                         }
                         if (isInCounty == false)
                         {
-                            errorMessage = "您没有权限查询该地域的数据！！";
+                            errorMessage = "您没有权限查询该地域的数据！！当前数据为示例数据。。。";
                             ViewData["info"] = errorMessage;
+                            fields = new List<string>();
+                            fields.Add("品牌");
+                            fields.Add("合计");
+                            ViewData["fields"] = fields;
 
-                            return null;
+                            var model1 = new List<MyDynamicType>() { new MyDynamicType { 品牌 = "大众", 合计 = 100 } }.ToPagedList(id, 1);
+                            if (Request.IsAjaxRequest())
+                                return PartialView("_AjaxSearchPost", model1);
+                            ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;
+                            return View(model1);
                         }
                     }
 
                 }
 
             }
-            var esql = @"select " + groupParams + ",sum(p.保有量) as 合计 from  PassengerVehicle as p " ;//"group by " + groupParams;
+            var esql = @"select " + @selectParams + ",sum(p.保有量) as 合计 from  PassengerVehicle as p " ;//"group by " + groupParams;
             var qry = db.PassengerVehicles.AsQueryable();
             if (!string.IsNullOrWhiteSpace(Province) && !Province.Contains("全部"))
             {
-                esql += @"where  (charindex('"+Province+ "',p.省)>0  or charindex(p.省, '" + Province + "')>0)";
+                esql += @" where  (charindex('"+Province+ "',p.省)>0  or charindex(p.省, '" + Province + "')>0) ";
             }
                 qry = qry.Where(x => x.省.Contains(Province) || Province.Contains(x.省));
             if (!string.IsNullOrWhiteSpace(City) && !City.Contains("全部"))
             {
-               esql += @" and charindex('" + City + "',p.市)>0";
+               esql += @" and charindex('" + City + "',p.市)>0 ";
             }
                 qry = qry.Where(x => x.市.Contains(City) || City.Contains(x.市));
             if (!string.IsNullOrWhiteSpace(County) && !County.Contains("全部"))
             {
-                esql+= @" and charindex('" + County + "',p.县)>0";
+                esql+= @" and charindex('" + County + "',p.县)>0 ";
             }
 
-            esql += @"group by " + groupParams;
+            esql += @" group by " + @groupParams;
 
             var items = db.Database.SqlQuery<MyDynamicType> (esql);
 
@@ -188,7 +248,7 @@ namespace WulingWebApplication.Controllers
            ViewData["info"] = errorMessage;
 
            var  model = items.ToPagedList(id, 7);
-
+            ViewData["fields"] = fields;
             if (Request.IsAjaxRequest())
                 return PartialView("_AjaxSearchPost", model);
             ViewData["user"] = System.Web.HttpContext.Current.User.Identity.Name;

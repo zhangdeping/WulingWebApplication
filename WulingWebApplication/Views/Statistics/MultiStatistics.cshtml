@@ -1,6 +1,7 @@
 ﻿@using WulingWebApplication.Infrastructure
 @using Webdiyer.WebControls.Mvc
 @model PagedList<MyDynamicType>
+<link rel="stylesheet" href="~/Content/myCheck.css" />
 <div style="margin:10px 10px 10px 10px">
     <fieldset>
         <legend>统计 </legend>
@@ -13,27 +14,154 @@
             <input type="text" name="CheckValues" id="CheckValues" hidden  />
             <select id="cmbProvince" name="cmbProvince"></select>
             <select id="cmbCity" name="cmbCity"></select>
-            <select id="cmbArea" name="cmbArea"></select>&nbsp;&nbsp;
-            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="时间"/>时间&nbsp;&nbsp;                 <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="品牌" />品牌&nbsp;&nbsp;
-            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="制造商" />制造商&nbsp;&nbsp;            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="发动机型号" />发动机型号&nbsp;&nbsp;
-            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="使用性质" />使用性质&nbsp;&nbsp;        <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="准确排量" />准确排量&nbsp;&nbsp;
-            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="功率" />功率&nbsp;&nbsp;                <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="前轮距" />前轮距&nbsp;&nbsp;
-            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="后轮距" />后轮距&nbsp;&nbsp;            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="变速器" />变速器&nbsp;&nbsp;
-            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="国产_进口" />国产_进口&nbsp;&nbsp;      <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="年龄" />年龄&nbsp;&nbsp;
-            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="性别" />性别&nbsp;&nbsp;                <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="总质量" />总质量&nbsp;&nbsp;
-            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="所有权" />所有权&nbsp;&nbsp;            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="抵押标记" />抵押标记&nbsp;&nbsp;
-            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="排放标准" />排放标准&nbsp;&nbsp;        <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="排量" />排量&nbsp;&nbsp;
-            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="整备质量" />整备质量&nbsp;&nbsp;        <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="核定载客" />核定载客&nbsp;&nbsp;
-            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="燃油类型" />燃油类型&nbsp;&nbsp;        <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="车型" />车型&nbsp;&nbsp;
-            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="车外廓宽" />车外廓宽&nbsp;&nbsp;        <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="车外廓长" />车外廓长&nbsp;&nbsp;
-            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="车外廓高" />车外廓高&nbsp;&nbsp;        <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="车身型式" />车身型式&nbsp;&nbsp;
-            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="车身颜色" />车身颜色&nbsp;&nbsp;        <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="车辆型号" />车辆型号&nbsp;&nbsp;
-            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="车身颜色" />车身颜色&nbsp;&nbsp;        <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="车辆型号" />车辆型号&nbsp;&nbsp;
-            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="车辆类型" />车辆类型&nbsp;&nbsp;        <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="轮胎规格" />轮胎规格&nbsp;&nbsp;
-            <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="轴数" />轴数&nbsp;&nbsp;                <input type="checkbox" class="i-checks" style="vertical-align:middle; margin-top:0;" name="param" value="轴距" />轴距&nbsp;&nbsp;
+            <select id="cmbArea" name="cmbArea"></select>&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="checkbox-custom checkbox-default">
+                <input type="checkbox" name="param"  id="check1"  value="时间" />
+                <label for="check1"> 时间</label>
+                 
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check2"  value="品牌" />
+                <label for="check2"> 品牌</label>
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check3" value="制造商" />
+                <label for="check3"> 制造商</label>
+            </div>          
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check4" value="发动机型号" />
+                <label for="check4"> 发动机型号</label>
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check5" value="使用性质" />
+                <label for="check5"> 使用性质</label>
+            </div>       
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check32" value="准确排量" />
+                <label for="check32"> 准确排量</label>
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check6" value="功率" />
+                <label for="check6"> 功率</label>
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check7" value="前轮距" />
+                <label for="check7"> 前轮距</label>
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check8" value="后轮距" />
+                <label for="check8"> 后轮距</label> 
+                
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check9" value="变速器" />
+                <label for="check9"> 变速器</label>
+                
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param"id="check10" value="国产_进口" />
+                <label for="check10"> 国产_进口</label>
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check11" value="年龄" />
+                <label for="check11"> 年龄</label>
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check12" value="性别" /> 
+                <label for="check12"> 性别</label>
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check13" value="总质量" />
+                <label for="check13"> 总质量</label>
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check14" value="所有权" />
+                <label for="check14"> 所有权</label>
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check15" value="抵押标记" />
+                <label for="check15"> 抵押标记</label>
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check16" value="排放标准" />
+                <label for="check16"> 排放标准</label>
+            </div>
+            <div class="checkbox-custom  checkbox-danger">
+                <input type="checkbox" name="param" id="check17" value="排量" />
+                <label for="check17"> 排量</label>
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check18" value="整备质量" />
+                <label for="check18"> 整备质量</label>
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check19" value="核定载客" />
+                <label for="check19"> 核定载客</label>
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check20" value="燃油类型" />
+                <label for="check20"> 燃油类型</label>
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check21" value="车型" />
+                <label for="check21"> 车型</label>
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check22" value="车外廓宽" />
+                <label for="check22"> 车外廓宽</label>
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check23" value="车外廓长" />
+                <label for="check23"> 车外廓长</label>
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check24" value="车外廓高" />
+                <label for="check24">车外廓高</label>
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check25" value="车身型式" />
+                <label for="check25"> 车身型式</label>
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check26" value="车身颜色" />
+                <label for="check26"> 车身颜色</label>
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check27" value="车辆型号" />
+                <label for="check27"> 车辆型号</label>
+            </div>
+           
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check28" value="车辆类型" />
+                <label for="check28"> 车辆类型</label>
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check29" value="轮胎规格" />
+                <label for="check29"> 轮胎规格</label>
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check30" value="轴数" />
+                <label for="check30"> 轴数</label>
+            </div>
+            <div class="checkbox-custom checkbox-danger">
+                <input type="checkbox" name="param" id="check31" value="轴距" />
+                <label for="check31"> 轴距</label>
+            </div>               
+                      
+                               
+                            
+                        
+                        
+                       
+                        
+                        
+                        
+                        
+                        
+                                
 
-            <input type="submit" value="统计所选字段"  />
-        </form>
+                <input type="submit" value="统计所选字段" />
+</form>
         @*}*@
     </fieldset>
     <div id="passengerVehicles">
